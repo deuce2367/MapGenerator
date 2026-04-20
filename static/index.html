@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MapGenerator | High-Res Export</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet & Draw CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- Sidebar Controls -->
+        <aside id="controls">
+            <header>
+                <h1>MapGenerator</h1>
+                <p>High-Fidelity Map Exporter</p>
+            </header>
+
+            <div class="control-group">
+                <label for="provider">Map Style</label>
+                <select id="provider"></select>
+            </div>
+
+            <div class="control-group">
+                <label for="resolution">Output Resolution (16:9)</label>
+                <select id="resolution">
+                    <option value="1920x1080">1080p (1920 x 1080)</option>
+                    <option value="3840x2160" selected>4K (3840 x 2160)</option>
+                    <option value="7680x4320">8K (7680 x 4320)</option>
+                </select>
+            </div>
+
+            <div class="control-group" style="display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" id="constrain-ratio" style="width: auto; margin: 0; cursor: pointer;">
+                <label for="constrain-ratio" style="margin: 0; line-height: 1; cursor: pointer;">Restrict box to output aspect ratio</label>
+            </div>
+
+            <div class="control-group" id="padding-color-group">
+                <label for="pad-color">Padding Background Color</label>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <input type="color" id="pad-color" value="#000000" style="padding: 0; border: none; width: 40px; height: 30px; border-radius: 4px; cursor: pointer; background: transparent;">
+                    <span class="helper-text" style="margin-top: 0;">Masking color for maps.</span>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #333; margin: 15px 0;">
+
+            <div class="control-group">
+                <label>Map Overlays</label>
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 5px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="show-scale" style="width: auto; margin: 0; cursor: pointer;">
+                            <label for="show-scale" style="margin: 0; line-height: 1; cursor: pointer;">Scale Bar</label>
+                        </div>
+                        <select id="scale-unit" style="width: 100px; padding: 4px;">
+                            <option value="metric" selected>Metric</option>
+                            <option value="imperial">Imperial</option>
+                            <option value="nautical">Nautical</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="show-graticule" style="width: auto; margin: 0; cursor: pointer;">
+                            <label for="show-graticule" style="margin: 0; line-height: 1; cursor: pointer;">Graticule</label>
+                        </div>
+                        <select id="graticule-type" style="width: 100px; padding: 4px;">
+                            <option value="latlon" selected>Lat/Lon</option>
+                            <option value="mgrs">MGRS</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <p>1. Navigate to your desired location.</p>
+                <p>2. Use the <strong>Square Tool</strong> on the left to draw a selection.</p>
+                <p>3. Generate your high-resolution map!</p>
+            </div>
+
+            <button id="generate-btn" disabled>
+                <span>Generate Map</span>
+                <div class="loader-spinner" id="loader" style="display: none;"></div>
+            </button>
+            <div id="error-msg"></div>
+        </aside>
+
+        <!-- Leaflet Map Container -->
+        <main id="map"></main>
+    </div>
+
+    <!-- Leaflet & Draw JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+    
+    <!-- App Logic -->
+    <script src="app.js"></script>
+</body>
+</html>

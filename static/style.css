@@ -1,0 +1,198 @@
+:root {
+    --bg-dark: #121214;
+    --acc-dark: #1c1c1f;
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --danger: #ef4444;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+#app-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+#controls {
+    width: 380px;
+    background: rgba(28, 28, 31, 0.85); /* Glassmorphism */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-right: 1px solid var(--border);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.4);
+}
+
+header {
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+header p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+.control-group {
+    margin-bottom: 1.5rem;
+}
+
+.control-group label {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+select {
+    width: 100%;
+    background: #0f0f11;
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    appearance: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.helper-text {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+.instructions {
+    margin-top: auto;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(15, 15, 17, 0.6);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.instructions p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.instructions p:last-child {
+    margin-bottom: 0;
+}
+
+#generate-btn {
+    appearance: none;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#generate-btn:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+#generate-btn:disabled {
+    background-color: var(--border);
+    cursor: not-allowed;
+    color: var(--text-muted);
+}
+
+#error-msg {
+    color: var(--danger);
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    text-align: center;
+    min-height: 20px;
+}
+
+#map {
+    flex-grow: 1;
+    height: 100%;
+}
+
+/* Spinner */
+.loader-spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Leaflet Overrides for Dark UI */
+.leaflet-control-container .leaflet-bar {
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.leaflet-control-container .leaflet-bar a {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    border-bottom: 1px solid #cbd5e1;
+}
+
+.leaflet-control-container .leaflet-bar a:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
